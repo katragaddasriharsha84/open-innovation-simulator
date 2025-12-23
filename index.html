@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Innovation Failure Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Open Innovation Failure Simulator</h1>
+    <div class="controls">
+      <label for="partner">Partner Type:</label>
+      <select id="partner">
+        <option value="Startup">Startup</option>
+        <option value="University">University</option>
+        <option value="Corporate">Corporate</option>
+      </select>
+
+      <label for="budget">Budget Level:</label>
+      <select id="budget">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+
+      <button onclick="simulate()">Simulate</button>
+    </div>
+
+    <div id="result" class="result">
+      ⚡ Your explanation will appear here
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
