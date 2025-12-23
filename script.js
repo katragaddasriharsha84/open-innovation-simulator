@@ -36,3 +36,28 @@ async function simulate() {
 }
 
 window.simulate = simulate;
+
+// Innovation idea form handler
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('innovation-form');
+    const textarea = document.getElementById('innovation-idea');
+    const resultDiv = document.getElementById('idea-result');
+
+    if (form) {
+          form.addEventListener('submit', (e) => {
+                  e.preventDefault();
+
+                  const idea = textarea.value.trim();
+                  if (!idea) {
+                            alert('Please enter your innovation idea.');
+                            return;
+                          }
+
+                  // Display the received idea on the page
+                  resultDiv.textContent = `Idea received: ${idea}`;
+                  resultDiv.style.color = 'lightgreen';
+                  textarea.value = '';
+                });
+        }
+  }
+
