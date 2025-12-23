@@ -2,29 +2,41 @@ async function simulate() {
   const partner = document.getElementById('partner').value;
   const budget = document.getElementById('budget').value;
   const result = document.getElementById('result');
+  
   result.innerText = '⏳ Generating explanation...';
   result.style.color = '#fff';
+
+  // Construct the prompt string that analyze.js expects
+  const simulationPrompt = `Simulate an open innovation project with a ${partner} partner and a ${budget} budget. 
+  Explain if it is a Success, Partial Failure, or Failure, and provide a brief reason.`;
+
   try {
-    const response = await fetch('YOUR_FUNCTION_URL_HERE', {
+    const response = await fetch('/api/analyze', { // Use the relative Vercel path
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ partner, budget })
+      body: JSON.stringify({ prompt: simulationPrompt }) // Match the "prompt" key in analyze.js
     });
+
     const data = await response.json();
-    const explanation = data.explanation;
+    
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    const explanation = data.response; // analyze.js returns { response: "..." }
     result.innerText = explanation;
+
+    // Logic for color coding remains the same
     if (explanation.includes('Success') || explanation.includes('✅')) {
       result.style.color = 'lightgreen';
-    } else if (explanation.includes('Partial Failure') || explanation.includes('⚠')) {
-      result.style.color = 'orange';
-    } else if (explanation.includes('Fail') || explanation.includes('❌')) {
+    } else if (explanation.includes('Failure') || explanation.includes('❌')) {
       result.style.color = 'red';
     } else {
-      result.style.color = '#fff';
+      result.style.color = 'orange';
     }
   } catch (error) {
     console.error(error);
-    result.innerText = '⚠ Could not generate explanation. Try again.';
+    result.innerText = '❌ Error: ' + error.message;
     result.style.color = 'red';
   }
 }
@@ -82,3 +94,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
