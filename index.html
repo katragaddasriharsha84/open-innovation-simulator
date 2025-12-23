@@ -26,6 +26,19 @@
 
       <button onclick="simulate()">Simulate</button>
     </div>
+    
+    <form id="innovation-form">
+            <label for="innovation-idea">Your innovation idea</label>
+            <textarea
+                      id="innovation-idea"
+                      name="innovationIdea"
+                      placeholder="Describe your innovation idea..."
+                      rows="4"
+                      required
+                    ></textarea>
+            <button type="submit">Submit idea</button>
+          </form>
+        <div id="idea-result"></div>
 
     <div id="result" class="result">
       ⚡ Your explanation will appear here
@@ -35,3 +48,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
